@@ -17,6 +17,7 @@ class Scraper:
         self.year = year
         return
     def scrape(self):
+        #scrape starting pages to get sets of links for individual races
         start_url = "https://ballotpedia.org/" + self.state + "_" + self.position + "_elections,_" + str(self.year)
         print(start_url)
         start_page = requests.get(start_url).text
@@ -28,6 +29,7 @@ class Scraper:
             #if not item.get("href") == None:
             print(item.get("href"))
                 #print(item)
+        # pull 
         return
 
 if __name__=="__main__":
