@@ -24,14 +24,17 @@ class Scraper:
         #print(start_page.text)
         soup = BeautifulSoup(start_page,'html.parser')
         races = []
-        for item in soup.find_all("li"):
-            item = item.a
-            #if not item.get("href") == None:
-            print(item.get("href"))
-                #print(item)
-        # pull 
-        return
-
+        for item in soup.find_all("h3"):
+            if not (item.next_sibling.next_sibling.span == None):
+                clist = item.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling
+                race = []
+                for text in clist.find_all("a"):
+                    if not (text.string==None):
+                        race.append(text.string)
+                races.append(race)
+        for r in races:
+            print(r[0]+ " vs " + r[1])
+        return races
 if __name__=="__main__":
     s = Scraper("North_Carolina","intermediate_appellate_court")
     s.scrape()
