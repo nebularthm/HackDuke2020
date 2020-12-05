@@ -1,13 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import "./styles.css";
+import Registration from "./Registration";
+import PolInfo from "./PolInfo";
+import SurveyPage from "./SurveyPage";
+import Header from "./Header";
+import { Route, Switch } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 
-function App() {
+const useStyles = makeStyles({});
+
+export default function App() {
+  const classes = useStyles();
   return (
-    <Button variant="contained" color="primary">
-      Hello World mati
-    </Button>
+    <div className={classes.container}>
+      <Header />
+      <Switch>
+        <Route exact from="/" render={props => <Registration {...props} />} />
+        <Route exact path="/PolInfo" render={props => <PolInfo {...props} />} />
+        <Route exact path="/SurveyPage" render={props => <SurveyPage {...props} />} />
+      </Switch>
+    </div>
   );
 }
-
-export default App
