@@ -5,7 +5,7 @@
 // };
 
 // export default Registration;
-import React from 'react';
+import React, { useCallback,useRef,useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,6 +17,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,7 +41,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Registration() {
   const classes = useStyles();
-
+  const history = useHistory();
+  const [myStates, setStates] = useState("")
+  const [myPositions, setPositions] = useState("")
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    history.push({
+      pathname: "/PolInfo",
+      state: {state: myStates, position: myPositions},
+    })
+}
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -85,6 +95,8 @@ export default function Registration() {
                 label="State"
                 name="state"
                 autoComplete="state"
+                value = {myStates}
+                onChange={(e) => setStates(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -100,6 +112,20 @@ export default function Registration() {
               />
             </Grid>
             <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="Position"
+                label="Position"
+                type="Position"
+                id="Position"
+                autoComplete="Position"
+                value = {myPositions}
+                onChange={(e) => setPositions(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive PolMatch updates and notifications via email."
@@ -111,6 +137,7 @@ export default function Registration() {
             fullWidth
             variant="contained"
             color="primary"
+            onClick= {handleSubmit}
             className={classes.submit}
           >
             Submit
