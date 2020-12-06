@@ -136,6 +136,7 @@ class SurveyPage extends Component {
  //Define Survey JSON
  //Here is the simplest Survey with one text question
  json = {
+   completeText: "Submit",
   elements: [
    { type: "matrix", 
    name: "polQuestions", 
@@ -161,19 +162,38 @@ class SurveyPage extends Component {
 ],
 rows: [
     {
-        value: "affordable",
-        text: "Product is affordable"
+        value: "is conservative",
+        text: "I identify as conservative"
     }, {
-        value: "does what it claims",
-        text: "Product does what it claims"
+        value: "climate change",
+        text: "Human activity is primarily responsible for climate change"
     }, {
-        value: "better then others",
-        text: "Product is better than other products on the market"
+        value: "legalizing marijuana",
+        text: "I support the legalization of marijuana"
     }, {
-        value: "easy to use",
-        text: "Product is easy to use"
+        value: "abortions",
+        text: "No abortions should be allowed, no matter the circumstances"
+    }, {
+        value: "free market",
+        text: "A free market economy is best for the US"
+    }, {
+        value: "socialism",
+        text: "A socialist economy is best for the US"
+    }, {
+        value: "immigration",
+        text: "Relaxing the immigration policy would have a negative effect on the US"
+    }, {
+        value: "economic inequality",
+        text: "Economic inequality is a major issue facing the US today"
+    }, {
+        value: "healthcare",
+        text: "The healthcare system currently in place in the US is adequate"
     }
-    ]}
+    ]}, {
+          type: "comment",
+          name: "suggestions",
+          title: "Comments/Questions regarding the survey"
+    },
   ]
  };
 
@@ -183,22 +203,19 @@ rows: [
   console.log("Survey results: " + JSON.stringify(survey.data));
  }
  render() {
-  //Create the model and pass it into react Survey component
-  //You may create survey model outside the render function and use it in your App or component
-  //The most model properties are reactive, on their change the component will change UI when needed.
   var model = new Survey.Model(this.json);
   return (<Survey.Survey model={model} onComplete={this.onComplete} css={this.myCss}/>);
-  /*
-  //The alternative way. react Survey component will create survey model internally
-  return (<Survey.Survey json={this.json} onComplete={this.onComplete}/>);
-  */
-  //You may pass model properties directly into component or set it into model
-  // <Survey.Survey model={model} mode="display"/>
-  //or 
-  // model.mode="display"
-  // <Survey.Survey model={model}/>
-  // You may change model properties outside render function. 
-  //If needed react Survey Component will change its behavior and change UI.
  }
+
+//  window.survey = new Survey.Model(json);
+
+// survey
+//     .onComplete
+//     .add(function (result) {
+//         document
+//             .querySelector('#surveyResult')
+//             .textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
+//     });
+
 }
 export default SurveyPage;
