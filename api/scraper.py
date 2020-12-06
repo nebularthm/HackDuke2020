@@ -90,7 +90,7 @@ class Scraper:
                 race = []
                 for text in clist.find_all("a"):
                     if not (text.string==None):
-                        race.append(text.string)
+                        race.append(text.string)##we just want the position name for spacing
                 races.append(race)
         #for r in races:
             #print(r[0]+ " vs " + r[1])
@@ -99,6 +99,7 @@ class Scraper:
     # type (entity/individual) in a list of lists containting this information.
     def contributions(self,candidate="Tricia_Shields", topN =5):
         candidate = candidate.replace("_","-")
+        candidate = candidate.replace(" ", "-")
         url = "https://www.transparencyusa.org/" + self.state_abbrev + "/candidate/" + candidate
         candidate_page = requests.get(url).text
         soup = BeautifulSoup(candidate_page,'html.parser')

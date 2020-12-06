@@ -4,6 +4,7 @@ import Registration from "./Registration";
 import PolInfo from "./PolInfo";
 import SurveyPage from "./SurveyPage";
 import Header from "./Header";
+import Contributions from "./Contributions";
 import { Route, Switch } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -18,6 +19,7 @@ export default function App() {
         <Route exact from="/" render={props => <Registration {...props} />} />
         <Route exact path="/PolInfo" render={props => <PolInfo {...props} />} />
         <Route exact path="/SurveyPage" render={props => <SurveyPage {...props} />} />
+        <Route exact path= "/Contributions" render={props => <Contributions {...props} /> } />
       </Switch>
     </div>
   );
