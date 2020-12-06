@@ -15,8 +15,8 @@ CORS(app)
 def get_current_time():
     return {'time': time.time()}
 
-@app.route("/result")
+@app.route("/result",methods = ['GET'])
 def get_politicians():
-    #add scraper here  
-    all_politicians = [doc.to_dict() for doc in politician_ref.stream()]
-        return jsonify(all_politicians), 200
+    s = Scraper("North_Carolina","intermediate_appellate_court")
+    all_politicians = s.scrape()
+    return jsonify(all_politicians), 200
